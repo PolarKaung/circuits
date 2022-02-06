@@ -1,0 +1,50 @@
+* C:\Users\ASUS\Documents\LTspiceXVII\examples\Educational\Draft2.asc
+M1 Output N002 N001 N001 IRFL9110
+R2 Output switch 100k
+R3 source N002 100k
+Q1 Gate switch 0 0 2N2222
+R4 source N006 100k
+S1 switch N006 control 0 Test
+Q2 N006 N007 0 0 2N2222
+R5 Output N007 200k
+V1 source 0 PWL(0 0 .1 6)
+V2 control 0 PULSE(0 5 .2 0.001 0.001 0.04 0.5)
+C1 N007 0 20µ
+R7 Output 0 10k
+R1 N002 Gate 1
+R6 N001 source 1
+R8 Output N003 1k
+D1 N003 0 D
+M2 Output2 drain source2 source2 IRFL9110
+R9 Output2 switch2 100k
+R10 source2 drain 100k
+R11 source2 N008 100k
+S2 switch2 N008 control2 0 Test
+R12 Output2 charge 50k
+V3 source2 0 PWL(0 0 .1 6)
+V4 control2 0 PULSE(0 5 .2 0.001 0.001 0.04 0.5)
+C2 charge 0 10µ
+R16 Output2 N004 10k
+D2 N004 0 D
+M3 drain switch2 0 0 BS170
+M4 N008 charge 0 0 BS170
+R17 switch2 0 100k
+M5 charge N005 P001 P001 BS170
+R18 P001 0 500
+R13 N005 0 100k
+R19 N005 drain 100k
+I1 Output2 0 {load} load
+.model D D
+.lib C:\Users\ASUS\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\ASUS\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\ASUS\Documents\LTspiceXVII\lib\cmp\standard.mos
+.model Test SW(Vt=2.5, Vh=-.4)
+.tran 2
+.param load 0
+.step param load 0 1000m 100m
+.backanno
+.end
